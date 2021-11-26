@@ -10,3 +10,5 @@
 - [v-for指令](./note/v-for.md)
 - [v-bind指令](./note/v-bind.md)
 - [v-slot指令](./note/v-slot.md)
+- [指令修饰符](./note/指令修饰符.md)
+- [自定义指令](./note/自定义指令.md)
