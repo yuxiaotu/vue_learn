@@ -9,3 +9,4 @@
 - [v-if和v-show指令](./note/v-if和v-show.md)
 - [v-for指令](./note/v-for.md)
 - [v-bind指令](./note/v-bind.md)
+- [v-slot指令](./note/v-slot.md)
