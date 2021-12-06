@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      #app {
+        display: flex;
+        justify-content: center;
+      }
+      .box {
+        width: 300px;
+        height: 400px;
+        margin: 20px;
+        background-color: #f2f3f5;
+        border-radius: 15px;
+      }
+      .red:hover {
+        box-shadow: 10px 10px 5px 5px rgba(220,20,60,0.3);
+      }
+      .green:hover {
+        box-shadow: 10px 10px 5px 5px rgba(173,255,47,0.3);
+      }
+      .yellow:hover {
+        box-shadow: 10px 10px 5px 5px rgba(255,255,0,0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- :style="{'box-shadow': '10px 10px 5px 5px '+ first.color }" -->
+      <div v-for="first in firstArr" :key="first.id" 
+           :class="['box', first.color]">
+       
+      </div>
+    </div>
+  </body>
+  <script>
+    const firsts = [
+      {
+        id: 1,
+        name: '苹果',
+        name_en: 'apple',
+        color: 'red'
+      },
+      {
+        id: 2,
+        name: '香蕉',
+        name_en: 'banana',
+        color: 'yellow'
+      },
+      {
+        id: 3,
+        name: '青瓜',
+        name_en: 'cucumber',
+        color: 'green'
+      }
+    ]
+    
+    const msg = () => {
+      const firstArr = Vue.ref(firsts);
+      return {
+        firstArr
+      }
+    }
+
+    const vue3Composition = {
+      setup() {
+        const {firstArr} = msg();
+        return {
+          firstArr
+        }
+      }
+    }
+
+    Vue.createApp(vue3Composition).mount('#app');
+  </script>
+</html>
