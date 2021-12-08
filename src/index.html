@@ -1,37 +1,73 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://unpkg.com/vue@next"></script>
     <style>
       #app {
         display: flex;
         justify-content: center;
       }
+      p {
+        margin: 0;
+      }
       .box {
         width: 300px;
         height: 400px;
         margin: 20px;
-        background-color: #f2f3f5;
         border-radius: 15px;
+        transition: all 0.5s ease;
+        background-color: #f2f3f5;
       }
+
+      .picture {
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .info {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .box img {
+        width: 60%;
+      }
+
       .red:hover {
-        box-shadow: 10px 10px 5px 5px rgba(220,20,60,0.3);
+        box-shadow: 0px 0px 8px 8px rgba(220, 20, 60, 0.2);
       }
       .green:hover {
-        box-shadow: 10px 10px 5px 5px rgba(173,255,47,0.3);
+        box-shadow: 0px 0px 8px 8px rgba(55, 167, 44, 0.2);
       }
       .yellow:hover {
-        box-shadow: 10px 10px 5px 5px rgba(255,255,0,0.3);
+        box-shadow: 0px 0px 8px 8px rgba(223, 220, 56, 0.171);
       }
     </style>
   </head>
   <body>
     <div id="app">
       <!-- :style="{'box-shadow': '10px 10px 5px 5px '+ first.color }" -->
-      <div v-for="first in firstArr" :key="first.id" 
-           :class="['box', first.color]">
-       
+      <div
+        v-for="first in firstArr"
+        :key="first.id"
+        :class="['box', first.color]"
+      >
+        <div class="picture"><img :src="first.img" /></div>
+        <div class="info">
+          <p style="font-size: 25px; margin-bottom: 10px">{{first.name}}</p>
+          <p style="color: #c8c9cc; margin-bottom: 10px">
+            原产地：{{first.origin}}
+          </p>
+          <p style="font-size: 18px">
+            ￥{{first.price}}.00
+            <span style="font-size: 12px; color: #969799">/500g</span>
+          </p>
+        </div>
       </div>
     </div>
   </body>
@@ -39,40 +75,49 @@
     const firsts = [
       {
         id: 1,
-        name: '苹果',
-        name_en: 'apple',
-        color: 'red'
+        name: "苹果",
+        name_en: "apple",
+        color: "red",
+        price: 5,
+        origin: "陕西洛川",
+        img: "./assets/img/apple.png",
       },
       {
         id: 2,
-        name: '香蕉',
-        name_en: 'banana',
-        color: 'yellow'
+        name: "香蕉",
+        name_en: "banana",
+        color: "yellow",
+        price: 6,
+        origin: "福建漳州",
+        img: "./assets/img/banana.png",
       },
       {
         id: 3,
-        name: '青瓜',
-        name_en: 'cucumber',
-        color: 'green'
-      }
-    ]
-    
+        name: "青瓜",
+        name_en: "cucumber",
+        color: "green",
+        price: 3,
+        origin: "山东寿光",
+        img: "./assets/img/cucumber.png",
+      },
+    ];
+
     const msg = () => {
       const firstArr = Vue.ref(firsts);
       return {
-        firstArr
-      }
-    }
+        firstArr,
+      };
+    };
 
     const vue3Composition = {
       setup() {
-        const {firstArr} = msg();
+        const { firstArr } = msg();
         return {
-          firstArr
-        }
-      }
-    }
+          firstArr,
+        };
+      },
+    };
 
-    Vue.createApp(vue3Composition).mount('#app');
+    Vue.createApp(vue3Composition).mount("#app");
   </script>
 </html>
