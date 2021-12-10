@@ -7,21 +7,25 @@
       #app {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
       }
+
       p {
         margin: 0;
       }
+
       .box {
         width: 300px;
-        height: 400px;
+        height: 300px;
         margin: 20px;
         border-radius: 15px;
         transition: all 0.5s ease;
         background-color: #f2f3f5;
+        
       }
 
       .picture {
-        height: 250px;
+        height: 180px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -35,7 +39,23 @@
       }
 
       .box img {
-        width: 60%;
+        width: 50%;
+        z-index: 1;
+      }
+
+      .t {
+        position: relative;
+      }
+
+      .t::before {
+        content: " ";
+        width: 100px;
+        height:10px;
+        background-color: #000000;
+        border-radius: 50%;
+        filter: blur(.5rem);
+        position: absolute;
+        top: 90%;
       }
 
       .red:hover {
@@ -47,6 +67,30 @@
       .yellow:hover {
         box-shadow: 0px 0px 8px 8px rgba(223, 220, 56, 0.171);
       }
+
+      .detail {
+        width: 65%;
+        height: 360px;
+        background-color: #f2f3f5;
+        border-radius: 15px;
+      }
+
+      .go {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        background-color: #f2f3f5;
+        border-radius: 15px;
+        font-size: 30px;
+        color: rgba(0, 0, 0, 0.5);
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -57,10 +101,12 @@
         :key="first.id"
         :class="['box', first.color]"
       >
-        <div class="picture"><img :src="first.img" /></div>
+        <div class="picture">
+          <div class="t" style="display: flex; justify-content: center;"><img :src="first.img" /></div>
+        </div>
         <div class="info">
-          <p style="font-size: 25px; margin-bottom: 10px">{{first.name}}</p>
-          <p style="color: #c8c9cc; margin-bottom: 10px">
+          <p style="font-size: 25px; margin-bottom: 5px">{{first.name}}</p>
+          <p style="color: #c8c9cc; margin-bottom: 5px">
             原产地：{{first.origin}}
           </p>
           <p style="font-size: 18px">
@@ -68,6 +114,13 @@
             <span style="font-size: 12px; color: #969799">/500g</span>
           </p>
         </div>
+      </div>
+
+      <div class="detail">
+      </div>
+
+      <div class="go">
+        购
       </div>
     </div>
   </body>
@@ -101,6 +154,7 @@
         img: "./assets/img/cucumber.png",
       },
     ];
+  
 
     const msg = () => {
       const firstArr = Vue.ref(firsts);
@@ -111,9 +165,9 @@
 
     const vue3Composition = {
       setup() {
-        const { firstArr } = msg();
+        const { firstArr} = msg();
         return {
-          firstArr,
+          firstArr
         };
       },
     };
