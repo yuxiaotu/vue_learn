@@ -3,6 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://unpkg.com/vue@next"></script>
+    <script src="js/imgList.js"></script>
     <style>
       #app {
         display: flex;
@@ -73,6 +74,9 @@
         height: 360px;
         background-color: #f2f3f5;
         border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .go {
@@ -90,6 +94,19 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+      }
+
+      .img-border {
+        border-radius: 10px;
+        border:solid 5px #fff;
+      }
+
+      .img-box {
+        position: relative;
+      }
+
+      .img-item {
+        position: absolute;
       }
     </style>
   </head>
@@ -117,6 +134,7 @@
       </div>
 
       <div class="detail">
+        <imglist :img="img"></imglist>
       </div>
 
       <div class="go">
@@ -154,24 +172,47 @@
         img: "./assets/img/cucumber.png",
       },
     ];
+
+
+    const imgs = [
+      {
+        id: 1,
+        img_url: "./assets/img/a1.jpg"
+      },
+      {
+        id: 2,
+        img_url: "./assets/img/a2.jpg"
+      },
+      {
+        id: 3,
+        img_url: "./assets/img/a3.jpg"
+      }
+    ]
   
 
     const msg = () => {
       const firstArr = Vue.ref(firsts);
+      const img = Vue.ref(imgs);
       return {
         firstArr,
+        img
       };
     };
 
     const vue3Composition = {
       setup() {
-        const { firstArr} = msg();
+        const { firstArr, img} = msg();
         return {
-          firstArr
+          firstArr,
+          img
         };
       },
     };
 
-    Vue.createApp(vue3Composition).mount("#app");
+    
+
+    Vue.createApp(vue3Composition)
+       .component('imglist', imgList)
+       .mount("#app");
   </script>
 </html>
