@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p ref="myRef">{{count}}</p>
+        <button @click="add">add</button>
+        <button @click="sub">sub</button>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    let { createApp, ref } = Vue;
+
+    composition = {
+      setup() {
+        let count = ref(0);
+
+        let add = function() {
+          count.value++;
+        }
+
+        let sub = function() {
+          count.value--;
+        }
+
+        return {
+          count,
+          add,
+          sub
+        }
+      }
+    }
+
+    createApp(composition).mount('#app')
+  </script>
+</html>

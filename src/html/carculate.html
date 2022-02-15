@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../style/calculater.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="main">
+        <div class="container">
+          <div class="display">{{expre}}</div>
+          <div class="keyword" @click="keywordClicked" ref="keywordArea"></div>
+          <div class="equal" @click="getRes">=</div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    let { createApp, ref, onMounted, nextTick } = Vue;
+
+    composition = {
+      setup() {
+        let expre = ref("");
+        const keywordArea = ref(null);
+
+        const keywordClicked = function (e) {
+          expre.value = new String(expre.value);
+          expre.value = expre.value.concat(e.target.innerHTML);
+        };
+
+        const getRes = function () {
+          let res = eval(expre.value);
+          if (res) {
+            expre.value = res;
+          } else {
+            expre.value = "";
+            alert("表达式错误");
+          }
+        };
+
+        nextTick(() => {
+          const mark = [
+            1,
+            2,
+            3,
+            "+",
+            4,
+            5,
+            6,
+            "-",
+            7,
+            8,
+            9,
+            "*",
+            10,
+            11,
+            12,
+            "/",
+          ];
+          let fragment = document.createDocumentFragment();
+          mark.forEach((item) => {
+            let node = document.createElement("div");
+            node.innerHTML = item;
+            fragment.append(node);
+          });
+          keywordArea.value.appendChild(fragment);
+        });
+
+        return {
+          expre,
+          keywordClicked,
+          getRes,
+          keywordArea,
+        };
+      },
+    };
+
+    createApp(composition).mount("#app");
+  </script>
+</html>
