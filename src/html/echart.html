@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../style/chart.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="chart" ref="chart"></div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+  <script>
+    let { createApp, ref, onMounted, nextTick } = Vue;
+
+    composition = {
+      setup() {
+        const chart = ref(null);
+        
+        const createChart = function(node) {
+          let chartInit = echarts.init(node);
+          chartInit.setOption({
+            title: {
+              text: 'echarts 柱状图'
+            },
+            tooltip: {},
+            xAxis: {
+              data: ['A', 'B', 'C']
+            },
+            yAxis: {},
+            series: [
+              {
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 10]
+              }
+            ]
+          })
+        }
+
+        nextTick(() => {
+          createChart(chart.value);
+        })
+
+        return {
+          chart,
+        }
+      }
+    }
+
+    createApp(composition).mount('#app')
+  </script>
+</html>
