@@ -24,4 +24,3 @@
 - [vuex概述](./note/vuex.md)
 - [ref | 获取 DOM 元素](./note/ref.md)
 - [nextTick](./note/nextTick.md)
-

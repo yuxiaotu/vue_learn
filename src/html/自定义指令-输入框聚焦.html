@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      input {
+        width: 350px;
+        height: 35px;
+        border-radius: 8px;
+      }
+
+      .f {
+        margin: 0;
+        font-size: 50px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <p class="f">{{text}}</p>
+        <input type="text" v-model="text" v-focus/>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const { createApp, ref, directives } = Vue;
+
+    const compositon = {
+      directives: {
+        focus: {
+          mounted(el) {
+            el.focus();
+          }
+        }
+      },
+
+      setup() {
+        let text = ref();
+        return {
+          text
+        }
+      }
+    }
+
+    
+
+    createApp(compositon).mount('#app');
+  </script>
+</html>
