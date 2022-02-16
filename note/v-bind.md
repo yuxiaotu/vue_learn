@@ -53,7 +53,7 @@ var app = new Vue({
 
 
 
-## 02. 修饰符
+## 02. v-bind 修饰符
 - #### .prop
   作为 DOM property 绑定，而不是 attribute 绑定。`v-bind` 默认绑定在 arrtribute 上。
 

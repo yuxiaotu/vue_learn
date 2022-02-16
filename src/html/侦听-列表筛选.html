@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .emun {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-color: #f2f3f5;
+      }
+      .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        height: 100px;
+        margin: 10px auto;
+        font-size: 20px;
+        font-weight: 600;
+        background-color: #f2f3f5;
+      }
+
+      p {
+        margin: 0
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="emun">
+        <input type="radio" id="one" value="less_10" v-model="price">
+        <label>小于10元</label>
+        <input type="radio" id="two" value="more_10" v-model="price">
+        <label>大于10元</label>
+      </div>
+      <div v-for="item in temp" :key="item.id" class="item">
+        <p>{{item.name}}</p>
+        <p>{{item.price}}</p>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const { createApp, ref, watch } = Vue;
+
+    const app = createApp({
+      setup() {
+        const fruit = [
+          {
+            id: 0,
+            name: 'apple',
+            price: 5
+          },
+          {
+            id: 1,
+            name: 'banana',
+            price: 9,
+          },
+          {
+            id: 2,
+            name: 'cherry',
+            price: 15
+          }
+        ];
+
+        let price = ref();
+        let temp = ref(fruit);
+
+        watch(price, (newValue) => {
+          if (newValue == 'less_10') {
+            temp.value =  fruit.filter(item => item.price < 10);
+          }
+
+          if (newValue == 'more_10') {
+            temp.value = fruit.filter(item => item.price > 10);
+          }
+        })
+
+        return {
+          fruit,
+          price,
+          temp
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</html>

@@ -1,11 +1,11 @@
 # v-model 指令
 
 ## 01. 作用
-`v-model` 用于表单元素例如 `<input>` 、`<textare>`，实现数据的「双向绑定」。
+`v-model` 指令作用于表单元素例如 `<input>` 、`<textare>`，实现数据的「双向绑定」。
 
 需要注意的是，「双向绑定」不能和「数据响应式原理」相混淆，数据响应式是通过数据的改变去驱动视图的渲染，而双向绑定不仅可以由数据来驱动 DOM 的渲染，当 DOM 改变时也促使数据改变。
 
-当 `input` 输入框中输入信息后，message 的值也会同步改变。
+当输入框中输入信息后，`message` 的值也会同步改变。
 
 ```html
 <div>
@@ -15,10 +15,10 @@
 ```
 
 ```js
-var app = new Vue({
-  el: '#app';
-  data: {
-    message: 'Hello World'
+var app = createApp({
+  setup() {
+    let message = ref();
+    return { message };
   }
 })
 ```
@@ -32,7 +32,9 @@ var app = new Vue({
 <input :value="message" @imput="message = $event.target.value">
 ```
 
-其中 `$event.target.value` 是当前触发的事件的 DOM 的 value 值。由 `@input` 方法把当前元素的 value 值赋值给 message，将 message 的值赋值到 value。由此形成一个闭环实现双向绑定。
+其中 `$event.target.value` 是当前触发的事件的 DOM 的 `value` 值。由 `@input` 方法把当前元素的 `value` 值赋值给 `message`。
+
+同时 `message` 也和 `<input>` 标签的 `value` 所绑定，由此形成一个闭环，实现双向绑定。
 
 
 
@@ -59,7 +61,7 @@ Vue.component('my-component', {
 
 
 
-## 04. 修饰符
+## 04. v-model 修饰符
 - #### .lazy
   默认情况下，输入框中的数据和绑定的数据是同步的。通过 `.lazy` 修饰符可以实现当输入框失焦或者是按下回车键后再更新数据。
 
