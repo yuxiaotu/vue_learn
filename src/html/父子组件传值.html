@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      background-color: #eea2a4;
+    }
+
+    input {
+      width: 450px;
+      height: 45px;
+      margin-top: 20px;
+      border-radius: 8px;
+      border: none;
+
+    }
+
+    .father {
+      width: 600px;
+      height: 400px;
+    }
+
+    .father p {
+      padding: 0;
+      margin: 0;
+      font-size: 40px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .son {
+      height: 100%;
+      border-radius: 10px;
+      background-color: #983680;
+    }
+
+    .btn {
+      width: 60px;
+      height: 45px;
+      border: none;
+    }
+  </style>
+  <body>
+    <div id="app" class="container">
+      <!-- 父组件 -->
+      <div class="father">
+        <p>Father Component</p>
+        <input type="text" v-model.lazy="message"/>
+        <p>{{ info }}</p>
+      </div>
+
+      <div class="father">
+        <!-- 子组件 -->
+        <son :message=message @my-click="onMyClick"></son>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="../js/son-component.js"></script>
+  <script>
+    const { createApp, ref, toRefs } = Vue;
+
+    const composition = {
+      setup(props, context) {
+        let message = ref();
+        let info = ref();
+        const onMyClick = function(msg) {
+          info.value = msg;
+        }
+        
+        return {
+          message,
+          info,
+          onMyClick
+        }
+      },
+    };
+
+    createApp(composition).component("son", son).mount("#app");
+  </script>
+</html>

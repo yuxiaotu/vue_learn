@@ -30,3 +30,4 @@
 ## 代码
 - [自定义指令 | 输入框自动聚焦](./src/html/自定义指令-输入框聚焦.html)
 - [watch 侦听 | 列表筛选](./src/html/侦听-列表筛选.html)
+- [父子组件之间传值 | props，emit](./src/html/父子组件传值.html)
