@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head></head>
+  <head>
+  </head>
   <body>
     <div id="app">
       <both-one></both-one>
@@ -12,7 +13,7 @@
   <script src="../js/borther-1.js"></script>
   <script src="../js/borther-2.js"></script>
   <script>
-    const { createApp, inject, ref } = Vue;
+    const { createApp, inject, ref, onMounted, nextTick } = Vue;
     const bus = new EventBus();
     const composition = {
       setup() {

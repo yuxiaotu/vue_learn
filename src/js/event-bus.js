@@ -3,6 +3,7 @@ class EventBus{
   constructor(){
       this.events = {};
   }
+
   emit(eventName, data) {
       if (this.events[eventName]) {
           this.events[eventName].forEach(function(fn) {
@@ -10,6 +11,7 @@ class EventBus{
           });
       }
   }
+  
   on(eventName, fn) {
       this.events[eventName] = this.events[eventName] || [];
       this.events[eventName].push(fn);
