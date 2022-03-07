@@ -1,27 +1,24 @@
-# v-for指令
+# v-for 指令
+
+- [v-for 指令的作用](#01-作用)
+- [v-for 不与 v-if 一起使用](#02-不与-v-if-一起使用)
+- [在 v-for 中 key 不设置为 index](#03-key-不取-index)
 
 
 ## 01. 作用
-`v-for` 是列表渲染指令，以数组为参数，将其渲染为一组元素。
+`v-for` 是列表渲染指令，以数组为参数，将数组数据渲染为一组元素。
+
 ```html
-<div>
-    <li v-for="item in items" :key="item.name">
-      {{item.name}}
-    </li>
-</div>
+<li v-for="item in items" :key="item.name">
+  {{ item.name }}
+</li>
 ```
 ```js
-var app = new createApp({
+createApp({
   setup() {
     const items = ref([
-      {
-        name: 'apple',
-        price: 10
-      },
-      {
-        name: 'banana',
-        price: 15
-      }
+      { name: 'apple', price: 10 },
+      { name: 'banana', price: 15 }
     ]);
 
     retrun {
@@ -31,31 +28,30 @@ var app = new createApp({
 }) 
 ```
 
-在 DOM 中表示为：
+数组数据在 `DOM` 中的渲染情况如下：
 ```html
-<div>
-  <li>apple</li>
-  <li>banana</li>
-</div>
+<li>apple</li>
+<li>banana</li>
 ```
-
 
 
 ## 02. 不与 v-if 一起使用
 `v-for` 指令不应该与 `v-if` 指令放在同一个标签中使用。
 
-例如，要显示 price 大于 10 的项目。由于 `v-for` 的优先级大于 `v-if` 所以，`v-if` 将运行于每一个 `v-for` 循环中，从而影响性能。
-
+例如，要显示 `price` 大于 `10` 的项目。
 ```html
-<div>
-    <li v-for="item in items" v-if="item.price > 10" :key="item.message">{{item.name}}</li>
-</div>
+<li 
+  v-for="item in items" 
+  v-if="item.price > 10" 
+  :key="item.message"
+> 
+  {{ item.name }}
+</li>
 ```
 
+但是，由于 `v-for` 的优先级大于 `v-if` 所以，`v-if` 将运行于每一个 `v-for` 循环中，从而影响性能。
 
-有下面这些解决方法：
-
-- 如果循环出现在条件内部，使用「计算属性」进行过滤。
+如果循环出现在条件内部，使用「计算属性」进行过滤。
   ```html
   <div>
     <li v-for="item in list">{{item.name}}</li>
@@ -72,13 +68,12 @@ var app = new createApp({
   }
   ```
 
-- 将 `v-if` 放在外层，判断整个列表是否渲染。
-  ```html
-  <div v-if="isShow">
-    <li v-for="item in items" key="item.name"></li>
-  </div>
-  ```
-
+或者是将 `v-if` 放在外层，判断整个列表是否渲染。
+```html
+<div v-if="isShow">
+  <li v-for="item in items" key="item.name"></li>
+</div>
+```
 
 
 ## 03. key 不取 index
