@@ -11,7 +11,7 @@
 - [自定义指令](./note/自定义指令.md)
 - [组合式API](./note/组合式API.md)
 - [组件的概念和作用](./note/组件.md)
-- [computed | 计算属性](./note/计算属性.md)
+- [computed | 计算属性](./note/计算属性cd.md)
 - [watch | 侦听](./note/监听属性.md)
 - [组件传值](./note/组件传值.md)
 - [setup()](./note/setup.md)
