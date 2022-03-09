@@ -1,7 +1,10 @@
 # nextTick()
 
+- [nextTick() 的作用](#1-作用)
+- [在 mounted 中使用](#2-在-mounted-中使用)
 
-## 01. 作用
+
+# 1. 作用
 `nextTick()` 的作用是在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
 
 从上述定义中，归纳出三个问题：
@@ -26,7 +29,7 @@ Vue.nextTick(function() => {
 ```
 
 
-## 02. 在 mounted 中使用
+# 2. 在 mounted 中使用
 `mounted` 阶段，虽然完成了挂载，但并不是所有子组件都被一起挂载了，如果你希望等到整个视图都渲染完毕，可以用 vm.$nextTick 替换掉 mounted。
 
 ```js
@@ -38,9 +41,8 @@ mounted: function() {
 ```
 
 
-
-## 03. 元素显隐切换
-点击按钮显示原本以 v-show = false 隐藏起来的输入框，并获取焦点。
+# 3. 元素显隐切换
+点击按钮显示原本以 `v-show = false` 隐藏起来的输入框，并获取焦点。
 
 ```js
 show() {
@@ -52,6 +54,5 @@ show() {
 ```
 
 
-
 ## 参考
-https://segmentfault.com/a/1190000012861862
+- https://segmentfault.com/a/1190000012861862

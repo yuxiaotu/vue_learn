@@ -1,7 +1,7 @@
 # Vue学习笔记
 
 ## 基础
-- [vue 的主要特点](./note/vue概述.md)
+- [Vue 的主要特点](./note/vue概述.md)
 - [v-model 指令 | 表单数据绑定](./note/v-model.md)
 - [v-if 和 v-show 指令 | 条件渲染](./note/v-if和v-show.md)
 - [v-for 指令 | 列表渲染](./note/v-for.md)
@@ -11,7 +11,7 @@
 - [自定义指令](./note/自定义指令.md)
 - [组合式API](./note/组合式API.md)
 - [组件的概念和作用](./note/组件.md)
-- [computed | 计算属性](./note/计算属性cd.md)
+- [computed | 计算属性](./note/计算属性.md)
 - [watch | 侦听](./note/监听属性.md)
 - [组件传值](./note/组件传值.md)
 - [setup()](./note/setup.md)

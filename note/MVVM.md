@@ -5,7 +5,7 @@
 
 
 
-## 01. MVC
+# 1. MVC
 MVC 通过分离 `Model` ，`View` 和 `Controller` 的方式来组织代码结构。其中 View 负责页面的显示逻辑，Model 负责页面的业务逻辑，以及相应数据的操作。
 
 `View` 和 `Model` 使用了观察者模式，当 `Model` 层发生改变的时候会通知有关 `View` 层页面更新。
@@ -14,7 +14,7 @@ MVC 通过分离 `Model` ，`View` 和 `Controller` 的方式来组织代码结�
 
 
 
-## 02. MVP
+# 2. MVP
 MVP 与 MVC 的不同之处在于 使用 `Presenter` 来代替 `Controller`。在 MVC 模式中使用观察者模式，来实现当 Model 层数据发生变化的时候，通知 View 层的更新。这样 View 层和 Model 层耦合在一起，当项目逻辑变得复杂的时候，可能会造成代码的混乱，并且可能会对代码的复用性造成一些问题。
 
 MVP 的模式通过使用 Presenter 来实现对 View 层和 Model 层的解耦。MVC 中的Controller 只知道 Model 的接口，因此它没有办法控制 View 层的更新，MVP 模式中，View 层的接口暴露给了 Presenter 因此可以在 Presenter 中将 Model 的变化和 View 的变化绑定在一起，以此来实现 View 和 Model 的同步更新。这样就实现了对 View 和 Model 的解耦，Presenter 还包含了其他的响应逻辑。
@@ -23,7 +23,7 @@ MVP 的模式通过使用 Presenter 来实现对 View 层和 Model 层的解耦�
 
 
 
-## 03. MVVM
+# 3. MVVM
 MVVM 分为 `Model`，`View`，和 `ViewModel`，其中 ViewModel 负责监听 Model 中数据的改变并且控制试图的更新，处理用户交互操作。
 
 Model和View并无直接关联，而是通过ViewModel来进行联系的，Model和ViewModel之间有着双向数据绑定的联系。因此当Model中的数据改变时会触发View层的刷新，View中由于用户交互操作而改变的数据也会在Model中同步。
