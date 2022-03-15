@@ -1,3 +1,6 @@
+/**
+ * 图片列表组件
+ */
 const imgList = {
   props: ["img"],
 

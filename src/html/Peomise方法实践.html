@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Promise 实践</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+      img {
+        width: 400px;
+        height: 400px;
+      }
+      .btn {
+        width: 100px;
+        height: 50px;
+        margin-top: 10px; 
+        background-color: skyblue;
+        color: #fff;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p v-show="loading">更新...</p>
+      <img :src="imgUrl" />
+      <button @click="updateImg" class="btn">Update</button>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="../js/request-promise.js"></script>
+  <script>
+    const { createApp, ref, onBeforeMount, nextTick } = Vue;
+
+    const composition = {
+      setup() {
+        //let item = ref();
+        
+        // onMounted(async () => {
+        //   const data = await fetch('https://api.oick.cn/douyin/api.php?url=https://v.douyin.com/eo1gaGQ/')
+        //     .then(rsp => rsp.json());
+        //   item.value = data;
+        // })
+
+        // getUrlContent = async function() {
+        //   const res = await request('GET', 'https://api.oick.cn/douyin/api.php?url=https://v.douyin.com/eo1gaGQ/');
+        //   item.value = res;
+        // }
+
+
+        let imgUrl = ref();
+        let loading = ref(false);
+        
+        let updateImg = async function() {
+          loading.value = true;
+          let res = await request('GET', 'https://dog.ceo/api/breeds/image/random');
+          imgUrl.value = JSON.parse(res).message;
+          loading.value = false;
+        }
+
+        onBeforeMount(updateImg());
+
+        return {
+          // item,
+          // getUrlContent
+          imgUrl,
+          updateImg,
+          loading
+        }
+      }
+    }
+
+    createApp(composition).mount('#app');
+  </script>
+</html>

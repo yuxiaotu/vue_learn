@@ -1,66 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
+  <head>
+    <title>父组件和子组件之间传值</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
 
-    .container {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      width: 100vw;
-      height: 100vh;
-      background-color: #eea2a4;
-    }
+      .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
 
-    input {
-      width: 450px;
-      height: 45px;
-      margin-top: 20px;
-      border-radius: 8px;
-      border: none;
+      input {
+        width: 400px;
+        height: 45px;
+        margin-top: 20px;
+        border-radius: 8px;
+        border: none;
+        background-color: #f2f3f5;
+        outline: none;
+      }
 
-    }
+      .father {
+        width: 600px;
+        height: 400px;
+      }
 
-    .father {
-      width: 600px;
-      height: 400px;
-    }
+      .f1 {
+        padding: 0;
+        margin: 0;
+        font-size: 40px;
+        font-weight: 600;
+      }
 
-    .father p {
-      padding: 0;
-      margin: 0;
-      font-size: 40px;
-      font-weight: 600;
-      color: #ffffff;
-    }
+      .son {
+        height: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #ccc; 
+        box-sizing: border-box;
+      }
 
-    .son {
-      height: 100%;
-      border-radius: 10px;
-      background-color: #983680;
-    }
-
-    .btn {
-      width: 60px;
-      height: 45px;
-      border: none;
-    }
-  </style>
+      .btn {
+        width: 60px;
+        height: 45px;
+        margin-left: 20px;
+        border-radius: 8px  ;
+        border: none;
+      }
+    </style>
+  </head>
   <body>
     <div id="app" class="container">
       <!-- 父组件 -->
       <div class="father">
-        <p>Father Component</p>
-        <input type="text" v-model.lazy="message"/>
-        <p>{{ info }}</p>
+        <p class="f1">Father Component</p>
+        <p>父组件向子组件传值：props</p>
+        <input type="text" v-model.lazy="message" />
+        <p style="font-size:30px; font-weight:600;">{{ info }}</p>
       </div>
 
       <div class="father">
         <!-- 子组件 -->
-        <son :message=message @my-click="onMyClick"></son>
+        <son :message="message" @my-click="onMyClick"></son>
       </div>
     </div>
   </body>
@@ -73,15 +80,15 @@
       setup(props, context) {
         let message = ref();
         let info = ref();
-        const onMyClick = function(msg) {
+        const onMyClick = function (msg) {
           info.value = msg;
-        }
-        
+        };
+
         return {
           message,
           info,
-          onMyClick
-        }
+          onMyClick,
+        };
       },
     };
 

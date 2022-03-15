@@ -1,4 +1,6 @@
-// eventBus.js
+/**
+ * 事件车方法
+ */
 class EventBus{
   constructor(){
       this.events = {};

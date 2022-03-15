@@ -1,3 +1,6 @@
+/**
+ * 使用 promise 和 XMLHttpRequest 封装请求函数
+ */
 const request = function(method, url) {
   return new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();

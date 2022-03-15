@@ -23,10 +23,10 @@ const bother_1 = {
 
   template: `
     <div>
-      <p>Borther 1</p>
-      <p>{{ msg }}</p>
+      <p class="t">Borther 1</p>
       <input type="text" v-model="inputContent" />
       <button @click="biu">发送</button>
+      <p>{{ msg }}</p>
     </div>
   `
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>自定义计算器</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="../style/calculater.css" />
   </head>
@@ -9,7 +10,7 @@
     <div id="app">
       <div class="main">
         <div class="container">
-          <div class="display">{{expre}}</div>
+          <div class="display">{{ expre }}</div>
           <div class="keyword" @click="keywordClicked" ref="keywordArea"></div>
           <div class="equal" @click="getRes">=</div>
         </div>

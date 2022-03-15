@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Router 路由</title>
+    <style>
+      #app {
+        display: flex;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .side {
+        width: 300px;
+        height: 100vh;
+        padding: 20px;
+        border-right: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      .content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: calc(100vw - 300px);
+        height: 100vh;
+      }
+
+      .link {
+        display: block;
+        height: 50px;
+        margin: 10px 0;
+        background-color: #f2f3f5;
+      }
+
+      .f {
+        font-size: 150px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="side">
+        <router-link
+          v-for="link in links"
+          :key="link.name"
+          :to="link.path"
+          class="link"
+        >
+          {{ link.name }}
+        </router-link>
+      </div>
+      <div class="content">
+        <router-view></router-view>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/vue-router@4"></script>
+  <script>
+    const { createApp, ref } = Vue;
+
+    // 定义子组件
+    const Home = { template: `<div class="f">Home</div>` };
+    const About = { template: `<div class="f">About</div>` };
+
+    // 定义路由
+    const routes = [
+      { path: "/", component: Home, name: 'Home' },
+      { path: "/about", component: About, name: 'About' },
+    ];
+
+    const router = VueRouter.createRouter({
+      history: VueRouter.createWebHashHistory(),
+      routes,
+    });
+
+    const composition = {
+      setup() {
+        let links = ref(routes);
+        return { links };
+      },
+    };
+    createApp(composition).use(router).mount("#app");
+  </script>
+</html>
