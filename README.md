@@ -28,6 +28,9 @@
 
 
 ## 代码
+- [Vue3 实践](./src/html/Vue3实践.html)
 - [自定义指令 | 输入框自动聚焦](./src/html/自定义指令-输入框聚焦.html)
 - [watch 侦听 | 列表筛选](./src/html/侦听-列表筛选.html)
 - [父子组件之间传值 | props，emit](./src/html/父子组件传值.html)
+- [Router 路由实践](./src/html/Router路由实践.html)
+- [同级组件传值 | 事件车实践](./src/html/事件车实践.html)，[eventBus.js](./js/event-bus.js)
