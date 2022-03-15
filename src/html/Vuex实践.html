@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vuex 实践</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+      .f {
+        margin: 0;
+        font-size: 300px;
+        font-weight: 400;
+      }
+      .btn {
+        width: 120px;
+        height: 50px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p class="f">{{count}}</p>
+      <p>
+        <button class="btn" @click="add">加</button> 
+        <button class="btn" @click="sub">减</button>
+      </p>
+    </div>
+  </body>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="https://unpkg.com/vuex"></script>
+  <script>
+    const { createApp, ref, computed } = Vue;
+    
+    const store = new Vuex.Store({
+      state: {
+        count: 0
+      },
+      mutations: {
+        up(state) {
+          state.count += 1;
+        },
+
+        down(state) {
+          state.count -= 1;
+        }
+      }
+    })
+    
+
+    const composition = {
+      setup() {
+        const add = function() {
+          store.commit('up');
+        }
+        const sub = function() {
+          store.commit('down');
+        }
+
+        return {
+          count: computed(() => store.state.count),
+          add,
+          sub
+        }
+      }
+    } 
+
+    createApp(composition)
+      .mount('#app');
+  </script>
+</html>
