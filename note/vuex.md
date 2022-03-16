@@ -12,7 +12,7 @@
 
 如果你的项目里有很多页面（组件/视图），页面之间存在多级的嵌套关系，此时，这些页面假如都需要共享一个状态的时候，此时就会产生以下两个问题：
 
-- 多个试图依赖同一个状态。
+- 多个视图依赖同一个状态。
 - 来自不同的视图的行为需要变更同一个状态。
 
 为了解决这些问题，有以下的思路：
@@ -21,7 +21,7 @@
 
 
 # 2. 使用
-`vuex` 的关键也就在这个 `store`。在src路径下创建store文件夹，然后创建index.js文件，文件内容如下：
+`Vuex` 的关键在于「仓库」这个概念，把公共的状态以及修改状态的方法提取出来放到仓库中。
 
 ```js
 const store = new Vuex.Store({
@@ -43,10 +43,8 @@ const store = new Vuex.Store({
 this.$store.state.name;
 ```
 
-
-
 # 3. Getter
-可以通过计算属性访问（缓存），也可以通过方法访问（不缓存），你甚至可以在getters的方法里面再调用getters方法，当然你也实现了像state那样，使用mapGetters解构到计算属性中，这样你就可以很方便的使用getters啦！
+可以通过计算属性访问（缓存），也可以通过方法访问（不缓存），你甚至可以在 `getters` 的方法里面再调用 `getters` 方法，当然你也实现了像 `state` 那样，使用 `mapGetters` 解构到计算属性中，这样你就可以很方便的使用 `getters` 中的方法。
 
 ```js
 getters: {
@@ -56,12 +54,14 @@ getters: {
 }
 ```
 
-
+直接访问 `getters` 中的方法。
+```js
+$store.getters.getState
+```
 
 # 4. Mutation
-`mutation` 用于修改值。
 
-Mutations里面的函数必须是同步操作，不能包含异步操作。
+`mutation` 用于存放修改 `state` 的方法。`mutations` 里面的函数必须是同步操作，不能包含异步操作。
 
 ```js
 mutations: {
@@ -71,9 +71,19 @@ mutations: {
 }
 ```
 
+通过 `commit()` 方法来执行 `mutations` 中的方法。
+
+```js
+methods: {
+  changeData() {
+    this.$store.commit("setNumber");
+  }
+}
+```
 
 # 5. Action
-修改state的时候有异步操作放在，`action`。
+
+如果修改 `state` 的时候有异步操作放在 `actions` 中。
 
 ```js
 actions: {
@@ -87,6 +97,7 @@ actions: {
 }
 ```
 
+访问 `actions` 中的方法。
 ```js
 async mounted() {
   await this.$store.dispathch('setNum');
