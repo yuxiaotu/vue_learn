@@ -1,107 +1,113 @@
 # 组合式 API
 
-- [组合式 API 的含义](#1-组合式-API-的含义)
-- [选项式 API 实例](#2-选项式-API-实例)
-- [组合式 API 实例](#3-组合式-API-实例)
+- [选项式 API](#1-选项式-API)
+- [组合式 API](#2-组合式-API)
+- [代码复用方法](#3-代码复用方法)
 
+## 1. 选项式 API
 
-# 1. 组合式 API 的含义
-通过创建「组件」，可以将界面中重复的部分连同其功能一起提取为可以重用的代码段。
+在 vue2 中通过选项式 API 的方式来使用 methods、watch、computed 等来处理页面逻辑，数据归数据，方法归方法。
 
-当应用变得非常大的时候，「共享」和「重用」代码变得尤为重要。但是当组件变得很大时，通过 `data`、`computed`、`methods`、`watch` 等组件选项来组织逻辑会导致组件难以难以阅读和理解。
+例如，实现一个搜索功能和一个排序功能。
 
-逻辑「碎片化」的情况使得理解和维护复杂组件变得困难，选项的分离掩盖了潜在的逻辑问题。此外，在处理单个逻辑关注点时，我们必须不断地「跳转」相关代码的选项块。
-
-「组合式API」就是为了把逻辑关注点相关的代码收集在一起。
-
-
-# 2. 选项式 API 实例
-例如，从假定的外部 API 获取该用户的仓库，显示仓库列表。
-```js
+```vue
 export default {
-  components: {
-    RepositoriesFilter,
-    RepositoriesSortBy,
-    RepositoniesList
-  }
-
-  props: {
-    user: {
-      type: String,
-      required: true
-    }
-  }
-
   data() {
     return {
-      repositories: {},
-      filters: {},
-      searchQuery: ''
+      searchData; // 搜索结果
+			sortData; // 排序结果
     }
-  }
-
-  computed: {
-    filteredRepositories() {},
-    repositoriesMatchingSearchQuery() {}
   },
-
-  watch: {
-    user: 'getUserRepositories'
-  },
-
   methods: {
-    getUserRepositiories() {}
-    updateFilter() {}
-  }.
+    useSearch() {} // 搜索功能
+		useStor() {} // 排序功能
+  },
+}
+```
 
-  mounted() {
-    this.getUserRepositories();
+在选项式 API 模式下，随着业务功能的增加，代码量也会增加。但是这些功能代码在 methods 内是零散分布的，在调试过程中要在各个模块中跳转，这也叫「反复横跳」。
+
+## 2. 组合式 API
+
+组合式 API 方式下，由于是基于函数的，可以将功能部件提取到函数中更加容易。
+
+用组合式 API 方式实现搜索和排序功能。
+
+```js
+export default {
+  function useSearch() {};
+	function useStor() {};
+
+  setup() {
+    return { ...useSearch(), ...useStor() }
   }
 }
 ```
 
+## 3. 代码复用方法
 
-# 3. 组合式 API 实例
-使用组合式 API 的方式实现上述案例。
+在 vue2 中经常使用 `mixin` 来提取代码进行复用。
+
 ```js
+const productSearchMixin = {
+  data() {
+    return { searchData };
+  }
+  methods: {
+  	useSearch() {};
+	}
+}
+
+const resultSortMixin = {
+  data() {
+    return { sortData };
+  }
+  methods: {
+  	useStor() {};
+	}
+}
+
 export default {
-  components: {
-    RepositoriesFilter,
-    RepositoriesSortBy,
-    RepositoniesList
-  }
+  mixins: [productSearchMixin, resultSortMixin];
+}
+```
 
-  props: {
-    user: {
-      type: String,
-      required: true
-    }
-  }
+`mixin` 可以根据逻辑关注点进行组织代码，也存在下面这些缺点：
 
-  setup(props) {
-    const { user } = toRefs(props);
-    let repositories = ref([]);
+- 任意导致属性名称冲突。
+- 不清楚混合元素如何作用。
+- 混合后的组件属性不方便在其他组件中复用。
 
-    const getUserRepositories = async () => {
-      repositories.value = await fetchUserRepositories(prop.user);
-    }
+组合式 API 为我们提供了组织复用代码的另一种方案。
 
-    onMounted(getUserRepositories);
+**search.js**
 
-    watch(user, getUserRepositories);
+```js
+export default function useSearch(getResult) {
+  // 搜索功能
+}
+```
 
-    const searchQuery = ref('');
-    const repositoriesMatchchingSearchQuery = computed(() => {
-      return repositories.value.filter(
-        repository => repository.name.includes(searchQuery.value);
-      )
-    })
+**sort.js**
 
+```js
+export default function useSort({input, options}) {
+  // 搜索功能
+}
+```
+
+**index.vue**
+
+```js
+import useSearch from '@use/search';
+import useSort from '@use/sort';
+export default {
+  setup() {
+    const productSearch = useSearch(configuration);
+    const resultSort = useSorting({});
     return {
-      repositories,
-      getUserRepositories,
-      searchQuery,
-      repositoriesMatchchingSearchQuery
+      productSearch,
+      resultSort
     }
   }
 }
@@ -111,5 +117,4 @@ export default {
 
 ****
 
-- https://juejin.cn/post/6976830388580646942#heading-7
-- https://juejin.cn/post/6999531044374315015#heading-3
+- https://xie.infoq.cn/article/91af5a841ff75503049e5ecf8

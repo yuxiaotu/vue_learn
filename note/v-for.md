@@ -14,21 +14,16 @@
 </li>
 ```
 ```js
-createApp({
-  setup() {
-    const items = ref([
-      { name: 'apple', price: 10 },
-      { name: 'banana', price: 15 }
-    ]);
-
-    retrun {
-      items
-    }
-  }
-}) 
+setup() {
+  const items = ref([
+    { name: 'apple', price: 10 },
+    { name: 'banana', price: 15 }
+  ]);
+  retrun { items }
+}
 ```
 
-数组数据在 `DOM` 中的渲染情况如下：
+数组数据在 DOM 中的渲染情况如下：
 ```html
 <li>apple</li>
 <li>banana</li>
@@ -51,10 +46,10 @@ createApp({
 
 但是，由于 `v-for` 的优先级大于 `v-if` 所以，`v-if` 将运行于每一个 `v-for` 循环中，从而影响性能。
 
-如果循环出现在条件内部，使用「计算属性」进行过滤。
+可以使用「计算属性」先对数据进行过滤，然后再渲染。
   ```html
   <div>
-    <li v-for="item in list">{{item.name}}</li>
+    <li v-for="item in list">{{ item.name }}</li>
   </div>
   ```
 
@@ -68,7 +63,7 @@ createApp({
   }
   ```
 
-或者是将 `v-if` 放在外层，判断整个列表是否渲染。
+或者是将 `v-if` 放在外层，判断是否要渲染整个列表。
 ```html
 <div v-if="isShow">
   <li v-for="item in items" key="item.name"></li>

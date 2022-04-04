@@ -1,25 +1,22 @@
-# setup()
+# 组合式 API 中的 setup()
 
-- [组合式 API 中 setup() 的作用](#1-setup()-的作用)
-- [setup() 的参数](#2-setup()-的参数)
-  - [props](#21-props)
-  - [context](#22-context)
-- [定义响应式变量](#3-定义响应式变量)
-  - [ref](#31-ref)
-  - [toRefs](#32-toRef)
-  - [reactive](#33-reactive)
-- [依赖注入](#4-依赖注入)
+- [setup() 的作用](#1-setup-的作用)
 
 
-# 1. setup() 的作用
-`setup()` 是一个新的组件选项，也是「组合式 API」的基础，`setup()` 在组件创建之前执行。所以在 `setup()` 中要避免使用 `this` 因为无法找到组件实例。
+# 1. setup 的作用
+`setup()` 是一个接收 `props` 和 `context` 的函数，也是「组合式 API」的基础，`setup()` 在组件创建之前执行。在生命周期中扮演 [beforeCreate]() 和 [created]() 这两个钩子函数的作用。所以在 `setup()` 中要避免使用 `this` 因为无法找到组件实例。
 
 在 `setup()` 中定义的属性和方法都需要通过 `retrun` 返回，否则不能在模板中使用。
 
+```js
+export default {
+  setup(props, context) {
+    return {}
+  }
+}
+```
 
-
-# 2. setup() 的参数
-`setup()` 方法接受下面这两个参数：
+# 2. setup 的参数
 - props
 - context
 

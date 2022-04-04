@@ -14,19 +14,17 @@
 当输入框中输入信息后，`message` 的值也会同步改变。
 
 ```html
-<div id="app">
+<div>
   <p>{{ message }}</p>
   <input v-model="message"/>
 </div>
 ```
 
 ```js
-createApp({
-  setup() {
-    let message = ref();
-    return { message };
-  }
-}).mount('#app');
+setup() {
+  let message = ref();
+  return { message };
+}
 ```
 
 
@@ -67,13 +65,13 @@ Vue.component('my-component', {
 
 
 # 4. v-model 指令的修饰符
-- #### .lazy
+- .lazy
   默认情况下，输入框中的数据和绑定的数据是同步的。通过 `.lazy` 修饰符可以实现当输入框失焦或者是按下回车键后再更新数据。
 
-- #### .number
+- .number
   将输入的值转换为数值类型。
 
-- #### .tirm
+- .tirm
   去掉字符首尾空格。
 
   ```html

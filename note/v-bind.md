@@ -8,7 +8,9 @@
 
 
 # 1. 作用
-`v-bind` 指令可以绑定 `HTML` 标签属性，例如 `class`，`style` 等属性。`v-bind` 为属性绑定变量，只要对变量进行操作，就可以完成对标签相应属性进行操作。
+`v-bind` 指令可以绑定 HTML  标签属性，例如 `class`，`style` 等属性。`v-bind` 为属性绑定变量，只要对变量进行操作，就可以完成对标签相应属性进行操作。
+
+`v-bind` 的简写形式用 `:` 表示。
 
 
 # 2. 绑定 class 属性
@@ -86,12 +88,11 @@ createApp({
 
 
 # 5. v-bind 修饰符
-- #### .prop
+- .prop
   作为 `DOM property` 进行绑定，而不是 `attribute` 。`v-bind` 默认绑定在 `arrtribute` 上。[DOM property 和 attribute](https://juejin.cn/post/6844903874143191047)
 
-- #### .camel
+- .camel
   将属性名转化为骆峰命名形式。
 
-- #### .sync
+- .sync
   当一个子组件改变了一个 `prop` 的值时，这个变化也会同步到父组件中所绑定。
-  
