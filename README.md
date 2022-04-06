@@ -25,11 +25,11 @@
 - [MVVM 模式的含义](./note/MVVM.md)
 - [响应式的含义和实现原理](./note/响应式原理.md)
 - [保存页面当前状态](./note/保持页面当前状态.md)
-- [路由的历史模式](./note/路由模式.md)
 - [ref | 获取 DOM 元素](./note/ref.md)
 - [nextTick()](./note/nextTick.md)
 - [指令修饰符](./note/指令修饰符.md)
 - [自定义指令](./note/自定义指令.md)
+- [diff算法](./note/diff算法.md)
 
 ## 代码
 
